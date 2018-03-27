@@ -1,6 +1,6 @@
 
 # Iceberg or Not Iceberg? 
-An Image Classification Problem
+A Traditional vs. Convolutional Neural Network Image Classification Problem
 By Xu Cao, Thomas Guo, and Louise Lai
 
 ![icebergs](bands.png)
@@ -9,7 +9,11 @@ By Xu Cao, Thomas Guo, and Louise Lai
 See full paper here: https://docs.google.com/document/d/1yvszY0MhvLaHDs6TdiBjB2FXW5RD-X8SwVEd8hGgUnA/edit?usp=sharing
 
 ## I. Abstract
-Our project was to build an binary image classifier that is able to classify between icebergs and ships. The data was pulled from Kaggle. Employing the CRISP-DM model, we went through the following phases: Business Understanding, Data Understanding, Data Preparation, Modeling, and Evaluation. We tested three different types of models: shallow classifiers, shallow classifiers with feature extraction, and deep learning with convolutional neural networks. Our models had accuracies of 73.26%, 76.50%, and 84.30% respectively.
+Our project was to build an binary image classifier that is able to classify between icebergs and ships. The data was pulled from Kaggle. Employing the CRISP-DM model, we went through the following phases: Business Understanding, Data Understanding, Data Preparation, Modeling, and Evaluation. 
+
+We tested three different types of models: shallow classifiers, shallow classifiers with feature extraction, and deep learning with convolutional neural networks. 
+
+Our models had accuracies of 73.26%, 76.50%, and 84.30% respectively.
 
 ## II. Project Description
  
@@ -132,7 +136,7 @@ Results for K-NN: 76.50% Accuracy
 
 As you can see, the added feature did not improve the Naive Bayes model but actually improved the K-NN model by a significant amount. This shows that feature extraction can help shallow classifiers.
 
-### vD. Deep Learning with Convolutional Neural Networks
+### D. Deep Learning with Convolutional Neural Networks
 This section provides an overview of the CNN algorithm used.
 Convolutional Neural Networks (CNNs) are a form of neural networks that are proven to be highly effective in solving image classification problems. There are four main steps in a CNN, as illustrated below:
 

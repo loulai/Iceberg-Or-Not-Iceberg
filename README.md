@@ -26,7 +26,7 @@ If we can detect if these objects in the ocean are icebergs or ships using satel
 
 ## IV. Data Understanding
 
-A. Introduction
+### A. Introduction
 Kaggle provides us with all the data that we need, so there was no need to collect data. The following is a brief summary of our data.
 
 Target Variable:
@@ -40,7 +40,7 @@ inc_angle: Incidence angle from which the image was taken.
 
 We had a total of 1604 data points in the training set, with 753 being icebergs and 851 being ships.
 
-B. Further Exploration of band_1 and band_2
+### B. Further Exploration of band_1 and band_2
 The Kaggle competition provided an unclear description of the features band_1 and band_2 so we did further research. band_1 corresponds to an HH polarization while band_2 corresponds to an HV polarization from the satellite.
 
 What does this mean? The satellite detects objects on earth by sending out electromagnetic waves. These electromagnetic waves can be polarized, which changes the direction of the waves’ electric field. For example, if the radiation is vertically polarized, the electromagnetic wave oscillates vertically. HV(transmit/receive horizontally) means the waves being sent out are horizontally polarized and the reflecting waves are vertically polarized. HH is a type of co-polarized signal, which means waves are transmitted and received in the same way. Co-polarized signals are usually strong. HV is a type of cross-polarized signal, which means the polarization of received waves is perpendicular to the polarization of transmit waves. Cross-polarized signals are usually weak but they are useful when multiple scattering (radiation is scattered by multiple localized scattering centers) occurs.
@@ -60,7 +60,7 @@ We created an image for each band as well as an image of the bands combined toge
 These images helped us to visualize the very abstract data given to us in decibels and to glean key insight from the dataset.
 
 
-C. Further Exploration of inc_angle
+### C. Further Exploration of inc_angle
 As mentioned previously, inc_angle is the incidence angle from which the image was taken.
 
 We took the same scientific approach and found that the incidence angle is the angle between the incident radar beam and the direction perpendicular to the surface. A large or a small incidence angle doesn’t mean a picture with better quality.
@@ -71,9 +71,9 @@ Over one-tenth of all images are captured at an angle of 43° (181/1604  = 11.3%
 There are no images captured at an incidence angle greater than 46°
 Excluding outliers, virtually all images are captured within a ten degree window starting from 35° and ending at 45° (1591/1604  = 99.2%)
 
-V. Data Preparation
+## V. Data Preparation
 
-A. Feature Extraction: Texture
+### A. Feature Extraction: Texture
 Through our research, we discovered that feature extraction can make image classifiers better. So one step in our data preparation phase was to extract a feature representing texture from the images.
 
 Our work is based off of a research paper we found on IEEE: ieeexplore.ieee.org/document/4309314/. However, all the code we wrote was original. Below, we discuss the steps we took to extract the texture feature. The code is called ImageToTexture.java.
@@ -85,12 +85,13 @@ First, for each image we construct a gray-tone spatial-dependence matrix using t
 Second, using the gray-tone spatial-dependence matrix, we take the sum of the square of all values in the matrix and then divide that by the size of the matrix. This give us a value called Angular Second Moment, which measures how homogeneous the image is. The intuition behind this is that the more homogenous your image is, the larger numbers you’ll get in your gray-tone spatial-dependence matrix. This means a higher Angular Second Moment value.
 
 We then took Angular Second Moment and used it as a feature in our dataset.
-B. Converting JSON to CSV
+
+### B. Converting JSON to CSV
 Our data was provided in a JSON format, which we converted to CSV for easier use. For example, band_1 was given in an array format. We split each value of band_1 into its own column in the CSV. This meant that each pixel was a feature. We also took the texture feature we computed in the previous part and added it to this csv file. The code that does this is called convertToCSV.js.
 
 ## VI. Modeling
 
-A. Introduction
+### A. Introduction
 Our approach to this problem was educational. We did not want to spend all of our time optimizing one model. Instead, we wanted to explore a variety of models and compare them. We used a paper by Yann LeCun, Geoffrey Hinton, and Yoshua Bengio to learn more about the different models available for image classification: https://www.researchgate.net/publication/277411157_Deep_Learning. 
 
 We learned that the traditional approach to image classification was using shallow classifiers on top of feature extraction. The new approach is using Convolutional Neural Networks. Thus, we narrowed down our approach to three different types of models: shallow classifiers, shallow classifiers with feature extraction, and deep learning.
@@ -103,7 +104,7 @@ However, in the following picture of a wolf and a dog that looks like a wolf, it
 
 We then compared shallow classifiers and deep learning with convolutional neural networks. We learned that shallow classifiers require a lot of domain knowledge and human time. Deep learning on the other hand does not need domain knowledge since the neural network learns features by itself. However, it does take a lot computational power and computer time. This is becoming less and less of a concern as computing power becomes cheaper. Finally, we learned that convolutional neural networks generally provide the best results for image classification.
 
-B. Shallow Classifiers
+### B. Shallow Classifiers
 We prototyped models in RapidMiner using two shallow classifiers: Naive Bayes and K-NN. The top level process looks like this:
 
 Inside the Cross Validation operator for Naive Bayes looks like this:
@@ -121,7 +122,7 @@ Results for K-NN: 73.26% Accuracy
 
 As you can see, K-NN proved to be the better shallow classifier for this problem.
 
-C. Shallow Classifiers with Feature Extraction
+### C. Shallow Classifiers with Feature Extraction
 We then used the same shallow classifiers on the updated dataset with the added texture feature, Angular Second Moment, which we extracted previously. The RapidMiner processes look exactly the same. The only difference is that the data includes an extra feature.
 
 Results for Naive Bayes: 64.58% Accuracy
@@ -131,7 +132,7 @@ Results for K-NN: 76.50% Accuracy
 
 As you can see, the added feature did not improve the Naive Bayes model but actually improved the K-NN model by a significant amount. This shows that feature extraction can help shallow classifiers.
 
-D. Deep Learning with Convolutional Neural Networks
+### vD. Deep Learning with Convolutional Neural Networks
 This section provides an overview of the CNN algorithm used.
 Convolutional Neural Networks (CNNs) are a form of neural networks that are proven to be highly effective in solving image classification problems. There are four main steps in a CNN, as illustrated below:
 
@@ -166,7 +167,7 @@ Our results reflected our research. Feature extraction did indeed improve the pe
 
 ## VIII. Conclusion
 
-A. Following the CRISP-DM Model
+### A. Following the CRISP-DM Model
 We tried to structure our project to match what is used in industry. Thus, we followed all phases of the CRISP-DM Model, except the last one, deployment.
 
 Business Understanding:
@@ -184,11 +185,11 @@ We experimented with 3 different types of models: shallow classifiers, shallow c
 Evaluation:
 We evaluated our models using accuracy and found that convolutional neural networks worked best, with an accuracy of 84.30%, which our other two models had accuracies of 73.26% and 76.50%.
 
-B. Challenges
+### B. Challenges
 We encountered and overcame many challenges during our project. One challenge was the fact that the images were not traditional RGB format, so we had to figure out a way to convert it into an appropriate format. Another challenge was the fact that there were two different representations of the images, which led to the problem of figuring out which one or both should be used. The biggest challenge we had was conducting research in a space that was completely new to us and understanding complex concepts such as convolutional neural networks.
 
-C. Learning Outcomes
-Listed below are some valuable lessons that we learned.
+### C. Learning Outcomes
+Listed below are some valuable lessons that we learned:
 * Executing all steps of CRISP-DM
 * Understanding the architectural steps in designing a predictive image classifier
 * Understanding the strengths and weaknesses of various methods of image classification (shallow classifiers vs. shallow classifiers with feature extraction vs. traditional neural networks vs. convolutional neural networks)

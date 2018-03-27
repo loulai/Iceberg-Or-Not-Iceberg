@@ -3,6 +3,8 @@
 An Image Classification Problem
 By Xu Cao, Thomas Guo, and Louise Lai
 
+![icebergs](bands.png)
+
 ## Paper Link
 See full paper here: https://docs.google.com/document/d/1yvszY0MhvLaHDs6TdiBjB2FXW5RD-X8SwVEd8hGgUnA/edit?usp=sharing
 

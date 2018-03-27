@@ -3,49 +3,26 @@
 An Image Classification Problem
 By Xu Cao, Thomas Guo, and Louise Lai
 
+## Paper Link
+See full paper here: https://docs.google.com/document/d/1yvszY0MhvLaHDs6TdiBjB2FXW5RD-X8SwVEd8hGgUnA/edit?usp=sharing
 
-## Table of Contents
-
-Abstract
-Project Description
-Business Understanding
-Data Understanding
-Introduction
-Further Exploration of band_1 and band_2
-Further Exploration of inc_angle
-Data Preparation
-Feature Extraction: Texture
-Converting JSON to CSV
-Modeling
-Introduction
-Shallow Classifiers
-Shallow Classifiers with Feature Extraction
-Deep Learning with Convolutional Neural Networks
-Evaluation
-Conclusion
-Following the CRISP-DM Model
-Challenges
-Learning Outcomes
-
-
-##I. Abstract
-
+## I. Abstract
 Our project was to build an binary image classifier that is able to classify between icebergs and ships. The data was pulled from Kaggle. Employing the CRISP-DM model, we went through the following phases: Business Understanding, Data Understanding, Data Preparation, Modeling, and Evaluation. We tested three different types of models: shallow classifiers, shallow classifiers with feature extraction, and deep learning with convolutional neural networks. Our models had accuracies of 73.26%, 76.50%, and 84.30% respectively.
 
-##II. Project Description
-
+## II. Project Description
+ 
 Our project was taken from kaggle.com: https://www.kaggle.com/c/statoil-iceberg-classifier-challenge/data 
 
 The task of the project is to classify the given data into two classes: iceberg or ship. Because the data contains quasi-images, we treat it as an image classification problem.
 
-##III. Business Understanding
+## III. Business Understanding
 
 This Kaggle competition was proposed by Statoil, an international oil company that operates ships around the globe. In particular, they are concerned about their ships off the East Coast of Canada. There are many drifting icebergs that pose a threat to these ships.
 
 If we can detect if these objects in the ocean are icebergs or ships using satellite data, we can greatly aid in the navigation of these ships by alerting them of potential icebergs.
 
 
-##IV. Data Understanding
+## IV. Data Understanding
 
 A. Introduction
 Kaggle provides us with all the data that we need, so there was no need to collect data. The following is a brief summary of our data.
@@ -109,7 +86,7 @@ We then took Angular Second Moment and used it as a feature in our dataset.
 B. Converting JSON to CSV
 Our data was provided in a JSON format, which we converted to CSV for easier use. For example, band_1 was given in an array format. We split each value of band_1 into its own column in the CSV. This meant that each pixel was a feature. We also took the texture feature we computed in the previous part and added it to this csv file. The code that does this is called convertToCSV.js.
 
-##VI. Modeling
+## VI. Modeling
 
 A. Introduction
 Our approach to this problem was educational. We did not want to spend all of our time optimizing one model. Instead, we wanted to explore a variety of models and compare them. We used a paper by Yann LeCun, Geoffrey Hinton, and Yoshua Bengio to learn more about the different models available for image classification: https://www.researchgate.net/publication/277411157_Deep_Learning. 
@@ -150,7 +127,6 @@ Results for Naive Bayes: 64.58% Accuracy
 Results for K-NN: 76.50% Accuracy
 
 
-
 As you can see, the added feature did not improve the Naive Bayes model but actually improved the K-NN model by a significant amount. This shows that feature extraction can help shallow classifiers.
 
 D. Deep Learning with Convolutional Neural Networks
@@ -174,7 +150,7 @@ How many batch sizes / epochs?
 Epochs are the number of times and entire dataset is shown the the CNN. Batch sizes are the number of data points the model parses at one time. So, for example, if you have 1000 data points and a batch size of 250, it will take 4 iterations to complete one epoch. After testing ranges of epochs and batch sizes, we found that a batch size of 32 and epoch of 12 was the most optimal, resulting in an validation accuracy of 84%.
 
 
-##VII. Evaluation
+## VII. Evaluation
 
 We can evaluate our models with various metrics such as precision, recall, or speed. For this problem, we decided to use accuracy, which we believe gives a good representation of performance in situations where you have binary classification and the dataset is split relatively evenly between the two classes.
 
@@ -186,7 +162,7 @@ Deep Learning with C.N.N.: 84.30%
 Our results reflected our research. Feature extraction did indeed improve the performance of our shallow classifier and convolutional neural networks did outperform shallow classifiers.
 
 
-##VIII. Conclusion
+## VIII. Conclusion
 
 A. Following the CRISP-DM Model
 We tried to structure our project to match what is used in industry. Thus, we followed all phases of the CRISP-DM Model, except the last one, deployment.
